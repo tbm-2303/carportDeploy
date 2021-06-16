@@ -32,7 +32,7 @@ public class CreateOrderCommand extends CommandProtectedPage {
 
 
         try {
-            HttpSession session = request.getSession();
+
 
             if (request.getParameter("accept") != null) {
                 Request_obj request_obj = requestFacade.getRequest(Integer.parseInt(request.getParameter("accept")));
@@ -43,8 +43,9 @@ public class CreateOrderCommand extends CommandProtectedPage {
                 request_obj.setStatus("ordered");
                 Order order = orderFacade.createOrder(request_obj, ts);
                 request.setAttribute("comfirmation_object", order);
+                request.setAttribute("confirmation_request", request_obj);
             }
-            return "index";//order confirmation page
+            return pageToShow ;//order confirmation page
         } catch (UserException ex) {
             request.setAttribute("error", ex.getMessage());
             return "index";

@@ -75,6 +75,16 @@
             </form>
         </div>
 
+        <c:if test="${requestScope.error != null }">
+            <p style="color:red">
+                    ${requestScope.error}
+            </p>
+        </c:if>
+
+        <c:if test="${not empty param.msg}">
+            <p style="font-size: large">${param.msg}</p>
+        </c:if>
+
 
     </jsp:body>
 </t:genericpage>>

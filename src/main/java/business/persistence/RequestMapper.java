@@ -32,13 +32,14 @@ public class RequestMapper {
                 ps.setInt(1, request_id);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
+                    int requestID = rs.getInt("request_id");
                     int carport_id = rs.getInt("carport_id");
                     int user_id = rs.getInt("user_id");
                     String status = rs.getString("status_info");
                     User user = userFacade.getUser(user_id);
                     Carport carport = carportFacade.getCarport(carport_id);
                     Request_obj request_obj = new Request_obj(user, carport, status);
-                    request_obj.setRequest_id(request_id);
+                    request_obj.setRequest_id(requestID);
                     return request_obj;
                 }
             } catch (SQLException ex) {

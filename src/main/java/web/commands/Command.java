@@ -27,11 +27,11 @@ public abstract class Command {
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
 
-        commands.put("sendrequestpage", new CommandProtectedPage("sendrequest", "customer"));//shows: sendrequest.jsp
+        commands.put("sendrequestpage", new CommandUnprotectedPage("sendrequest"));
         commands.put("viewmyrequest", new ViewMyRequestPage("viewmyoffer", "customer"));//CUSTOMER: shows this customers request
         commands.put("sendRequestCommand", new SendRequest("index")); // send request
         commands.put("viewrequestspage", new Requestpage("viewrequests", "employee"));//ADMIN: shows all requests
-        commands.put("createorder", new CreateOrderCommand("viewmyoffer", "customer"));
+        commands.put("createorder", new CreateOrderCommand("confirmationpage", "customer"));
         commands.put("vieworderspage", new OrderPage("vieworders", "employee"));
         commands.put("viewuserpage", new CustomerPage("viewcustomers", "employee"));
         commands.put("updateRequestCommand", new UpdateRequestCommand("viewrequests", "employee"));
@@ -40,6 +40,7 @@ public abstract class Command {
         commands.put("sendrequest_standard", new SendRequest_standard("index", "customer"));
         commands.put("getbasket", new GetBasket("basketpage","customer"));
         commands.put("createorder_standard", new CreateOrderStandard("index", "customer"));
+        commands.put("removeoffer", new RemoveOffer("index", "customer"));
 
 
         //commands.put("showrequstpage", new ShowRequestpage("viewrequests", "employee"));

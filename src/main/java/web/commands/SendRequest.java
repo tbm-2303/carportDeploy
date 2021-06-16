@@ -5,6 +5,7 @@ import business.exceptions.UserException;
 import business.services.CarportFacade;
 import business.services.ItemFacade;
 import business.services.RequestFacade;
+import business.services.Util;
 import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 
 import javax.servlet.ServletContext;
@@ -22,6 +23,7 @@ public class SendRequest extends CommandUnprotectedPage {
     private ItemFacade itemFacade;
     private RequestFacade requestFacade;
     private CarportFacade carportFacade;
+    private Util util;
 
 
     public SendRequest(String pageToShow) {
@@ -29,6 +31,7 @@ public class SendRequest extends CommandUnprotectedPage {
         itemFacade = new ItemFacade(database);
         carportFacade = new CarportFacade(database);
         requestFacade = new RequestFacade(database);
+        util = new Util(database);
     }
 
     private List<Item> CustomCarportRecipe(int width, int length, int shed_length, int shed_width) throws UserException {
@@ -119,25 +122,46 @@ public class SendRequest extends CommandUnprotectedPage {
 
             if (shed_width > width || shed_length > length) {
                 request.setAttribute("error", "You cant select a shed width or shed width greater then the length or width of the carport.");
-                return "sendRequest";
+                return "sendrequest";
             }
             if (requestList.isEmpty()) {
 
                 //itemlist
-                List<Item> listy = CustomCarportRecipe(width, length, shed_length, shed_width);
+                List<Item> listy = util.CustomCarportRecipe(length,width,shed_width,shed_length);
                 //price
                 double price = 0;
                 for (Item item : listy) {
                     double itemprice = item.getPrice();
                     price += itemprice;
                 }
-                //carport
+                if (length >= 6000){
+                    price += 1000;
+                }
+                else if (length >= 4500){
+                    price += 1000;
+                }
+                else if (length >= 2400){
+                    price += 1000;
+                }
+
+
+
+                if (width >= 6000){
+                    price += 1000;
+                }
+                else if (width >= 4500){
+                    price += 1000;
+                }
+                else if (width >= 2400){
+                    price += 1000;
+                }
+
+                //carport DB
                 Carport carport = carportFacade.createCarportCustom(new Carport(price, length, width, shed_length, shed_width, "flat", "info"));
-                carport.setItemList(listy);
-                //request
+
+                //request DB
                 Request_obj request1 = requestFacade.createRequest(new Request_obj(user, carport, "requested"));
-                requestList.add(request1);
-                request.setAttribute("request_customer", request1);
+
             } else {
                 request.setAttribute("error", "You already made a request for a custom carport." +
                         "You cannot make another request before the your current request is resolved");
