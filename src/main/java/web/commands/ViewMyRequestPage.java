@@ -35,25 +35,23 @@ public class ViewMyRequestPage extends CommandProtectedPage {
             User user = (User) session.getAttribute("user");
             List<Request_obj> requestList = requestFacade.getAllRequest3(user.getId(), "requested");
             List<Request_obj> requestList2 = new ArrayList<>();
+            List<Item> itemlist = new ArrayList<>();
 
 
             if (!requestList.isEmpty()) {
                 for (Request_obj item : requestList) {
                     Carport carport = item.getCarport();
-                    if (carport.getShed_width() > 0 && carport.getShed_length() > 0){
+                    if (carport.getShed_width() > 0 && carport.getShed_length() > 0) {
                         carport.setHasShed(true);
                     }
-                    List<Item> itemlist = util.CustomCarportRecipe(carport.getLength(), carport.getWidth(), carport.getShed_width(), carport.getShed_length());
+                    itemlist = util.CustomCarportRecipe(carport.getLength(), carport.getWidth(), carport.getShed_width(), carport.getShed_length());
                     item.setItemList(itemlist);
                     requestList2.add(item);
-
-                    // SVG svg = new SVG(0,0,"0 0 855 690",100,100);
-                    //
-                    // request.setAttribute("svg", svg.toString());
                 }
             }
 
             request.setAttribute("requestList_customer", requestList2);
+            request.setAttribute("itemlist_customer", itemlist);
             return pageToShow;
 
         } catch (UserException e) {

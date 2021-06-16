@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/sem-project.iml" filepath="$PROJECT_DIR$/sem-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/carportDeploy.iml" filepath="$PROJECT_DIR$/carportDeploy.iml" />
     </modules>
   </component>
 </project>

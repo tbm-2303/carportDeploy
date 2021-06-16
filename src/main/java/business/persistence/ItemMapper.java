@@ -27,7 +27,6 @@ public class ItemMapper {
                 ps.setString(1, name);
                 ps.setInt(2, length);
                 ResultSet rs = ps.executeQuery();
-                List<Item> itemList2 = new ArrayList<>();
                 if (rs.next()) {
                     int item_id = rs.getInt("item_id");
                     double price = rs.getDouble("price");

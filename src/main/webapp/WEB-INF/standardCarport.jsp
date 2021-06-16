@@ -19,6 +19,8 @@
             <c:if test="${not empty requestScope.carportList_standard}">
                 <h4>Standard Carport </h4><br>
                 <c:forEach var="carport" items="${requestScope.carportList_standard}" varStatus="status">
+                    <img class="img-fluid w-25" src="<c:url value='/IMAGE/ProductPage${carport.id}.png'/>"
+                         alt="carport" type="submit"/><br>
                     ID:${carport.id}<br>
                     Price:${carport.price}<br>
                     Dimensions:${carport.width}cm x ${carport.length}cm<br>
@@ -26,15 +28,14 @@
                         Shed Dimensions:${carport.shed_width}cm x ${carport.shed_length}cm<br>
                     </c:if>
                     Standard INFO:skal skrives her<br>
-                    MANGLER IMG FOR CARPORT**<br>
                     <form action="${pageContext.request.contextPath}/fc/sendrequest_standard" method="post">
-                    <button type="submit" name="getCarport" id="getCarport" value="${carport.id}" style="outline-color: #0909b8"> </button><br><br>
+                        <button type="submit" class=" btn btn-danger" name="getCarport" id="getCarport"
+                                value="${carport.id}">tilføj til kurv
+                        </button>
                     </form>
                 </c:forEach>
             </c:if>
         </c:if>
-
-
 
 
         <c:if test="${sessionScope.role == 'customer' }">
@@ -43,8 +44,6 @@
             <p><a href="${pageContext.request.contextPath}/fc/sendrequestpage">order a custom carport</a>
             _______________________________________________________________________________________________________________________________________________________________________________________________
         </c:if>
-
-
 
 
         <c:if test="${requestScope.error != null }">

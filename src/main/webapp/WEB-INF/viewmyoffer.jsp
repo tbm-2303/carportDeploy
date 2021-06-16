@@ -43,41 +43,61 @@
                             <td>
                                 <form action="${pageContext.request.contextPath}/fc/createorder" method="post">
                                     <button type="submit" class=" btn btn-danger" name="accept"
-                                            value="${var.request_id}">Accept offer -> ${var.request_id}
+                                            value="${var.request_id}">Accept offer -> (${var.request_id})
+                                    </button>
+                                </form>
+                                <form action="${pageContext.request.contextPath}/fc/removeoffer" method="post">
+                                    <button type="submit" class=" btn btn-danger" name="remove"
+                                            value="${var.request_id}">Remove offer -> (${var.request_id})
                                     </button>
                                 </form>
                             </td>
                         </tr>
 
                     </c:if>
-                    </table>
                 </c:forEach>
+            </table>
+
         </c:if>
-
-
-
 
 
         <c:if test="${not empty requestScope.requestList_customer}">
+
+            TEGNING:
+            <p><a href="${pageContext.request.contextPath}/fc/ViewSketch">Tegning</a><br>
             <h4>Her kan du se en liste med materialer:</h4> <br>
-            <c:forEach var="request" items="${requestScope.requestList_customer}" varStatus="status">
-                TEGNING:
-                <p><a href="${pageContext.request.contextPath}/fc/ViewSketch">Tegning</a><br>
+            <table class="table table-success table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Item ID</th>
+                    <th scope="col">Item Price</th>
+                    <th scope="col">Item Width</th>
+                    <th scope="col">Item Length</th>
+                    <th scope="col">Item Info</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+                </thead>
 
-                <c:forEach var="itemlist" items="${requestScope.requestList_customer.get(status.index).itemList}"
-                           varStatus="status2">
+                <c:forEach var="item" items="${requestScope.itemlist_customer}" varStatus="status">
 
-                    Item Name:${itemlist.name}<br>
-                    Item Item ID:${itemlist.item_id}<br>
-                    Item Price:${itemlist.price}<br>
-                    Item Width:${itemlist.width}<br>
-                    Item Length:${itemlist.length}<br>
-                    Item Info:${itemlist.info}<br><br>
-
+                    <tr>
+                        <td>${item.name}<br></td>
+                        <td>${item.item_id}</td>
+                        <td>${item.price}</td>
+                        <td>${item.width}</td>
+                        <td>${item.length}</td>
+                        <td>${item.info}</td>
+                        <td>${item.quantity}</td>
+                    </tr>
 
                 </c:forEach>
-            </c:forEach>
+
+            </table>
         </c:if>
+
+
+
 
 
         <c:if test="${requestScope.error != null }">

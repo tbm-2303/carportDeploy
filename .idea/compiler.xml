@@ -6,16 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="sem-project" />
+        <module name="carportDeploy" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="sem-project" target="8" />
+      <module name="carportDeploy" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="sem-project" options="-endorseddirs C:\Users\cej12\Skrivebord\carport\carport\target/endorsed" />
+      <module name="carportDeploy" options="-endorseddirs C:\Users\cej12\Skrivebord\carportDeploy\carportDeploy\target/endorsed" />
     </option>
   </component>
 </project>

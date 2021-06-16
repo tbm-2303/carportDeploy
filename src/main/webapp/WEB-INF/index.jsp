@@ -30,6 +30,11 @@
         </c:if>
 
 
+        <c:if test="${sessionScope.Selected_Carport != null}">
+            <h7> Du har lige tilføjet en carport til din kurv. Gå til 'view my basket' i navigations bjælken for at se din kurv.</h7><br>
+            <h7> Du kan max have 1 carport i din kurv.</h7><br>
+        </c:if>
+
         <c:if test="${requestScope.request_customer != null}">
             <h7> Du har lige oprettet en forespørgsel. Gå til 'requests' i navigations bjælken for at se information on din request.</h7><br>
             <h7> Du kan ikke oprette en nu forespørgsel før denne request er blevet bearbejdet.</h7><br>

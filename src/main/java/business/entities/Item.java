@@ -2,7 +2,7 @@ package business.entities;
 
 public class Item {
 
-   private String info;
+    private String info;
     private String name;
     private double price;
     private int item_id;
@@ -18,6 +18,7 @@ public class Item {
         this.width = width;
         this.length = length;
         this.info = info;
+        this.quantity = 1;
 
     }
 

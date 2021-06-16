@@ -16,11 +16,12 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 
+import static java.lang.Math.floor;
+
 public class SendRequest extends CommandUnprotectedPage {
     private ItemFacade itemFacade;
     private RequestFacade requestFacade;
     private CarportFacade carportFacade;
-    private int start = 2400;
 
 
     public SendRequest(String pageToShow) {
@@ -30,15 +31,45 @@ public class SendRequest extends CommandUnprotectedPage {
         requestFacade = new RequestFacade(database);
     }
 
-    private List<Item> CustomCarportRecipe(int length, int width, int shed_width, int shed_length) throws UserException {
+    private List<Item> CustomCarportRecipe(int width, int length, int shed_length, int shed_width) throws UserException {
         try {
+            int buffer = 550;
             List<Item> listy = new ArrayList<>();
+            //skruer og beslag
+            listy.add(itemFacade.SelectItemFromDB("bundskruer", 0));
+            listy.add(itemFacade.SelectItemFromDB("bundskruer", 0));
+            listy.add(itemFacade.SelectItemFromDB("bundskruer", 0));
+
+            listy.add(itemFacade.SelectItemFromDB("Skruer", 50));
+            listy.add(itemFacade.SelectItemFromDB("Skruer", 50));
+            listy.add(itemFacade.SelectItemFromDB("Skruer", 70));
+            listy.add(itemFacade.SelectItemFromDB("Skruer", 70));
+            listy.add(itemFacade.SelectItemFromDB("Skruer", 60));
+
+            listy.add(itemFacade.SelectItemFromDB("stalddørsgreb", 75));
+
+            for (int i = 0; i < 18; i++) {
+                listy.add(itemFacade.SelectItemFromDB("bræddebolt", 150));
+            }
+            for (int i = 0; i < 12; i++) {
+                listy.add(itemFacade.SelectItemFromDB("firkantskiver", 40));
+            }
+
+            //spær
             listy.add(itemFacade.SelectItemFromDB("Spær", 4800));// always there
             listy.add(itemFacade.SelectItemFromDB("Spær", length));// always there1
             listy.add(itemFacade.SelectItemFromDB("Spær", length));// always there2
             for (int i = 0; i < 6; i++) {
                 listy.add(itemFacade.SelectItemFromDB("Spær", length));//always there6
             }
+
+            double count = Math.floor((double) width /550);
+            for (int i = 0; i < count-1; i++) {
+                listy.add(itemFacade.SelectItemFromDB("Spær", length));// 1 for each 550mm length added
+            }
+
+
+
             for (int i = 0; i < 4; i++) {
                 listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));//always there4
             }
@@ -46,30 +77,24 @@ public class SendRequest extends CommandUnprotectedPage {
             for (int i = 2400; i < 7510; i += 2500) {
                 if (width > i + 2500) {
                     for (int j = 0; j < 4; j++) {
-                        listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));// 3 for each 250cm width added
+                        listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));// 3 for each 2500mm width added
                     }
                 }
             }
 
-            for (int i = 2400; i < 7510; i += 550) {
-                if (width > (start + i)) {
-                    start = start + i;
-                    listy.add(itemFacade.SelectItemFromDB("Spær", length));// 1 for each 55cm length added
+
+            if (shed_length > 0 || shed_width > 0) {
+                for (int i = 0; i < 4; i++) {
+                    listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));//3 if shed is added
+                }
+                if (shed_length > (length * 0.75)) {
+                    listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));// 1 additional if shed length is over threshold
+                }
+                if (shed_width > (width * 0.75)) {
+                    listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));// 1 additional if shed width is over threshold
                 }
             }
-            if (length >= shed_length && width >= shed_width) {
-                if (shed_length > 0 || shed_width > 0) {
-                    for (int i = 0; i < 4; i++) {
-                        listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));//3 if shed is added
-                    }
-                    if (shed_length > (length * 0.75)) {
-                        listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));// 1 additional if shed length is over threshold
-                    }
-                    if (shed_width > (width * 0.75)) {
-                        listy.add(itemFacade.SelectItemFromDB("Stolpe", 3000));// 1 additional if shed width is over threshold
-                    }
-                }
-            }
+
             return listy;
         } catch (UserException e) {
             throw new UserException(e.getMessage());
@@ -99,7 +124,7 @@ public class SendRequest extends CommandUnprotectedPage {
             if (requestList.isEmpty()) {
 
                 //itemlist
-                List<Item> listy = CustomCarportRecipe(length, width, shed_width, shed_length);
+                List<Item> listy = CustomCarportRecipe(width, length, shed_length, shed_width);
                 //price
                 double price = 0;
                 for (Item item : listy) {
@@ -112,9 +137,9 @@ public class SendRequest extends CommandUnprotectedPage {
                 //request
                 Request_obj request1 = requestFacade.createRequest(new Request_obj(user, carport, "requested"));
                 requestList.add(request1);
-                request.setAttribute("request_customer",request1);
+                request.setAttribute("request_customer", request1);
             } else {
-                request.setAttribute("error", "You already made a request for a custom carport."+
+                request.setAttribute("error", "You already made a request for a custom carport." +
                         "You cannot make another request before the your current request is resolved");
             }
             return pageToShow;

@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><jsp:invoke fragment="header"/></title>
     <!-- Bootstrap CSS -->
+    <img class="img-fluid align-top" height="55" width="55" src="<c:url value='/IMAGE/logo.png'/>"
+         alt="carport" type="submit"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/styles.css">

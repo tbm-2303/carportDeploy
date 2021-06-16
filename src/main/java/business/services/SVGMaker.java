@@ -13,11 +13,11 @@ public class SVGMaker {
     SVG svg;
 
     public SVGMaker(Carport carport) {
-        this.width = carport.getShed_width()/10;
+        this.width = carport.getWidth()/10;
         this.length = carport.getLength()/10;
-        this.shed_length = carport.getLength()/10;
+        this.shed_length = carport.getShed_length()/10;
         this.shed_width = carport.getShed_width()/10;
-        svg = new SVG(0, 0, "0 0 " + width + " " + length, 100, 100);
+        svg = new SVG(0, 0, "0 0 " + width + " " + length, 25, 25);
         beam_distance = 30;
     }
 
@@ -26,6 +26,15 @@ public class SVGMaker {
         makeBeams();
         makeStolpe();
         makeDiagonals();
+    }
+
+
+
+    public void makeDimensions(){
+        int startx = 0;
+        int starty = 0;
+        int buffer = 5;
+        svg.addLine(width+buffer,starty,width+buffer,length+buffer);
     }
 
     public void makeFrame() {
@@ -69,7 +78,7 @@ public class SVGMaker {
         svg.addDottedLine(width, starty, startx, length);
     }
 
-    public String giveMeSkecth() {
+    public String giveMeSketch() {
         return svg.toString();
     }
 }

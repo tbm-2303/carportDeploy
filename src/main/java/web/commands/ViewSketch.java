@@ -34,13 +34,13 @@ public class ViewSketch extends CommandProtectedPage {
                     Carport carport = r.getCarport();
                     SVGMaker svg_maker = new SVGMaker(carport);
                     svg_maker.initialSVGStuff();
-                    String skecth = svg_maker.giveMeSkecth();
+                    String skecth = svg_maker.giveMeSketch();
                     request.setAttribute("skecth", skecth);
                     return pageToShow;
                 }
             }
         }
-        request.setAttribute("error", "You need to make a request before u can see an skecth");
+        request.setAttribute("error", "You need to make a request before u can see an sketch");
         return "index";
     }
 }

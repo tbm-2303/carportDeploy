@@ -21,7 +21,6 @@ public class StandardCarportPage extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException {
-        HttpSession session = request.getSession();
         List<Carport> carportList = carportFacade.getAllStandardCarports(2);
         for (Carport c : carportList) {
             c.setHasShed(c.getShed_length() > 0 && c.getShed_width() > 0);

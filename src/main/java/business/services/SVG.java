@@ -15,6 +15,7 @@ public class SVG {
             "y=\"%d\"   " +
             " preserveAspectRatio=\"xMinYMin\">";
 
+
     private final String rectEmptyTemplate = "<rect x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" style=\"stroke:#000; fill: none\" />";
     private final String rectTemplate = "<rect x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\" style=\"stroke:#000; fill: #FAFAFA\" />";
     private final String filledRectTemplate = "<rect x=\"%d\" y=\"%d\" width=\"%d\" height=\"%d\"  style=\"stroke:#000; fill: #c9c9c9\" />";
