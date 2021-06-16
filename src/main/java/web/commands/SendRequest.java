@@ -144,8 +144,6 @@ public class SendRequest extends CommandUnprotectedPage {
                     price += 1000;
                 }
 
-
-
                 if (width >= 6000){
                     price += 1000;
                 }
@@ -155,6 +153,7 @@ public class SendRequest extends CommandUnprotectedPage {
                 else if (width >= 2400){
                     price += 1000;
                 }
+
 
                 //carport DB
                 Carport carport = carportFacade.createCarportCustom(new Carport(price, length, width, shed_length, shed_width, "flat", "info"));

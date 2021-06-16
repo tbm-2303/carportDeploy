@@ -29,7 +29,7 @@
                     </c:if>
                     Standard INFO:skal skrives her<br>
                     <form action="${pageContext.request.contextPath}/fc/sendrequest_standard" method="post">
-                        <button type="submit" class=" btn btn-danger" name="getCarport" id="getCarport"
+                        <button type="submit" class=" btn btn-danger" name="getCarportID" id="getCarportID"
                                 value="${carport.id}">tilføj til kurv
                         </button>
                     </form>
@@ -38,7 +38,7 @@
         </c:if>
 
 
-        <c:if test="${sessionScope.role == 'customer' }">
+        <c:if test="${sessionScope.role == 'customer'}">
             _______________________________________________________________________________________________________________________________________________________________________________________________
             <h6> CARPORT EFTER EGNE MÅL</h6>
             <p><a href="${pageContext.request.contextPath}/fc/sendrequestpage">order a custom carport</a>

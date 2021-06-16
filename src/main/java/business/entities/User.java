@@ -6,95 +6,82 @@ import java.util.List;
 
 public class User {
 
-    public User(String email, String password, String role) {
+    public User(String name, String email, String address, String telephone, String role, String password) {
+        this.name = name;
         this.email = email;
-        this.password = password;
+        this.address = address;
+        this.telephone = telephone;
         this.role = role;
+        this.password = password;
     }
 
     private int id;
-    private String email;
-    private String password;
-    private String role;
-    private String number;
-    private String adress;
     private String name;
+    private String email;
+    private String address;
+    private String telephone;
+    private String role;
+    private String password;
 
-    private Carport carport;
-    private List<Request_obj> request_objList;
-    private Order order;
 
 
-    public Carport getCarport() {
-        return carport;
-    }
 
-    public void setCarport(Carport carport) {
-        this.carport = carport;
-    }
-
-    public List<Request_obj> getRequest_objList() {
-        return request_objList;
-    }
-
-    public void setRequest_objList(List<Request_obj> request_objList) {
-        this.request_objList = request_objList;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public int getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getAddress() {
+        return address;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public String getTelephone() {
+        return telephone;
     }
 
     public String getRole() {
         return role;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     public void setRole(String role) {
         this.role = role;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

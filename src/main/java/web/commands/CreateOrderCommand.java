@@ -42,7 +42,7 @@ public class CreateOrderCommand extends CommandProtectedPage {
                 requestFacade.updateRequestStatus(request_obj.getRequest_id(), "ordered");
                 request_obj.setStatus("ordered");
                 Order order = orderFacade.createOrder(request_obj, ts);
-                request.setAttribute("comfirmation_object", order);
+                request.setAttribute("confirmation_object", order);
                 request.setAttribute("confirmation_request", request_obj);
             }
             return pageToShow ;//order confirmation page

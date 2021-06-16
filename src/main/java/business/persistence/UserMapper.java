@@ -17,12 +17,15 @@ public class UserMapper {
 
     public void createUser(User user) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "INSERT INTO users (email, password, role) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO user (name, email, adress, telephone, role, password) VALUES (?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setString(1, user.getEmail());
-                ps.setString(2, user.getPassword());
-                ps.setString(3, user.getRole());
+                ps.setString(1, user.getName());
+                ps.setString(2, user.getEmail());
+                ps.setString(3, user.getAddress());
+                ps.setString(4, user.getTelephone());
+                ps.setString(5, user.getRole());
+                ps.setString(6, user.getPassword());
                 ps.executeUpdate();
                 ResultSet ids = ps.getGeneratedKeys();
                 ids.next();
@@ -38,17 +41,20 @@ public class UserMapper {
 
     public User login(String email, String password) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT user_id, role FROM user WHERE email=? AND password=?";
+            String sql = "SELECT user_id, name, adress, telephone, role FROM user WHERE email=? AND password=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
+                    int user_id = rs.getInt("user_id");
+                    String name = rs.getString("name");
+                    String address = rs.getString("adress");
+                    String telephone = rs.getString("telephone");
                     String role = rs.getString("role");
-                    int id = rs.getInt("user_id");
-                    User user = new User(email, password, role);
-                    user.setId(id);
+                    User user = new User(name,email,address,telephone,role,password);
+                    user.setId(user_id);
                     return user;
                 } else {
                     throw new UserException("Could not validate user");
@@ -75,10 +81,7 @@ public class UserMapper {
                     String telephone = rs.getString("telephone");
                     String role = rs.getString("role");
                     String password = rs.getString("password");
-                    User user = new User(email, password, role);
-                    user.setNumber(telephone);
-                    user.setName(name);
-                    user.setAdress(adress);
+                    User user = new User(name,email,adress,telephone,role,password);
                     user.setId(user_id);
                     return user;
                 }
@@ -108,10 +111,7 @@ public class UserMapper {
                     String role = rs.getString("role");
                     String password = rs.getString("password");
                     int user_id = rs.getInt("user_id");
-                    User user = new User(email, password, role);
-                    user.setNumber(telephone);
-                    user.setName(name);
-                    user.setAdress(adress);
+                    User user = new User(name,email,adress,telephone,role,password);
                     user.setId(user_id);
                     userList.add(user);
                 }

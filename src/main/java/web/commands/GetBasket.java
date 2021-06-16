@@ -18,10 +18,10 @@ public class GetBasket extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException {
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+
         if (session.getAttribute("Selected_Carport") == null) {
             request.setAttribute("error", "You currently have no carports in your basket.");
-            return "standardCarport";
+            return "index";
         }
         return "basketpage";
     }

@@ -41,6 +41,7 @@ public abstract class Command {
         commands.put("getbasket", new GetBasket("basketpage","customer"));
         commands.put("createorder_standard", new CreateOrderStandard("index", "customer"));
         commands.put("removeoffer", new RemoveOffer("index", "customer"));
+        commands.put("removefrombasket", new RemoveFromBasket("basketpage","customer"));
 
 
         //commands.put("showrequstpage", new ShowRequestpage("viewrequests", "employee"));
