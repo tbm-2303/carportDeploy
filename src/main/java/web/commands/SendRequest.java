@@ -118,13 +118,14 @@ public class SendRequest extends CommandUnprotectedPage {
 
             List<Request_obj> requestList = requestFacade.getAllRequest3(user.getId(), "requested");
 
-            //List<Request_obj> requestList_customer = (List<Request_obj>) session.getAttribute("requestList_customer_login");
 
             if (shed_width > width || shed_length > length) {
                 request.setAttribute("error", "You cant select a shed width or shed width greater then the length or width of the carport.");
                 return "sendrequest";
             }
-            if (requestList.isEmpty()) {
+
+
+            if (requestList.size() < 10) {
 
                 //itemlist
                 List<Item> listy = util.CustomCarportRecipe(length,width,shed_width,shed_length);
@@ -135,37 +136,38 @@ public class SendRequest extends CommandUnprotectedPage {
                     price += itemprice;
                 }
                 if (length >= 6000){
-                    price += 1000;
+                    price += 4000;
                 }
                 else if (length >= 4500){
-                    price += 1000;
+                    price += 2000;
                 }
                 else if (length >= 2400){
-                    price += 1000;
+                    price += 500;
                 }
 
                 if (width >= 6000){
-                    price += 1000;
+                    price += 4000;
                 }
                 else if (width >= 4500){
-                    price += 1000;
+                    price += 2000;
                 }
                 else if (width >= 2400){
-                    price += 1000;
+                    price += 500;
                 }
 
 
                 //carport DB
                 Carport carport = carportFacade.createCarportCustom(new Carport(price, length, width, shed_length, shed_width, "flat", "info"));
-
                 //request DB
-                Request_obj request1 = requestFacade.createRequest(new Request_obj(user, carport, "requested"));
-
-            } else {
-                request.setAttribute("error", "You already made a request for a custom carport." +
-                        "You cannot make another request before the your current request is resolved");
+                requestFacade.createRequest(new Request_obj(user, carport, "requested"));
+                return pageToShow;
             }
-            return pageToShow;
+            else {
+                request.setAttribute("error", "Max number of request is 10. Please resolve some of your current" +
+                        "requests before creating a new.");
+                return "index";
+            }
+
 
         } catch (UserException e) {
             request.setAttribute("error", e.getMessage());

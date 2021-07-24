@@ -2,6 +2,9 @@ package web.commands;
 
 import business.exceptions.UserException;
 import business.persistence.Database;
+import web.commands.admin.OrderPage;
+import web.commands.admin.Requestpage;
+import web.commands.admin.UpdateRequestCommand;
 
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -37,11 +40,15 @@ public abstract class Command {
         commands.put("updateRequestCommand", new UpdateRequestCommand("viewrequests", "employee"));
         commands.put("standardcarportpage", new StandardCarportPage("standardCarport", "customer"));
         commands.put("ViewSketch", new ViewSketch("sketchpage", "customer"));
-        commands.put("sendrequest_standard", new SendRequest_standard("index", "customer"));
+        commands.put("sendrequest_standard", new SendRequest_standard("basketpage", "customer"));
         commands.put("getbasket", new GetBasket("basketpage","customer"));
         commands.put("createorder_standard", new CreateOrderStandard("index", "customer"));
         commands.put("removeoffer", new RemoveOffer("index", "customer"));
         commands.put("removefrombasket", new RemoveFromBasket("basketpage","customer"));
+
+        commands.put("ManageOffer", new ManageOffer("manageoffer", "customer"));
+        commands.put("orderhistory", new ordersCommand("orderspage","customer"));
+        commands.put("orderInfoCommand", new orderInfoCommand("orderinfopage","customer"));
 
 
         //commands.put("showrequstpage", new ShowRequestpage("viewrequests", "employee"));

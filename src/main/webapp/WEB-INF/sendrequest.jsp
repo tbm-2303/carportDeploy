@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-
+               
 
                 <div class="col">
                     <div class="form-group">
@@ -70,6 +70,7 @@
 
 
                 <div>
+                    <p> </p>
                     <button type="submit" class="btn btn-lg btn btn-outline-success">send forespørgsel</button>
                 </div>
             </form>
@@ -84,6 +85,15 @@
         <c:if test="${not empty param.msg}">
             <p style="font-size: large">${param.msg}</p>
         </c:if>
+
+
+
+
+
+
+
+
+
 
 
     </jsp:body>

@@ -1,7 +1,13 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="carportDeploy:war">
+  <artifact type="war" name="carportDeploy:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="root">
+    <properties id="maven-jee-properties">
+      <options>
+        <module>carportDeploy</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="carportDeploy-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="carportDeploy:war exploded" />
     </root>
   </artifact>

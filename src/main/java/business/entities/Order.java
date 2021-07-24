@@ -2,15 +2,10 @@ package business.entities;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
-
-    public Order(double price, int request_id, String status, String user_name) {
-        this.price = price;
-        this.request_id = request_id;
-        this.status = status;
-        this.user_name = user_name;
-    }
 
     private int id;
     private Timestamp time;
@@ -18,7 +13,21 @@ public class Order {
     private int request_id;
     private String status;
     private String user_name;
+    private Carport carport;
 
+    public Order(double price, int request_id, String status, String user_name) {
+        this.price = price;
+        this.request_id = request_id;
+        this.status = status;
+        this.user_name = user_name;
+
+
+    }
+
+
+    public void setCarport(Carport carport) {
+        this.carport = carport;
+    }
 
     public Timestamp getTime() {
         return time;

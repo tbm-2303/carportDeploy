@@ -23,6 +23,6 @@ public class GetBasket extends CommandProtectedPage {
             request.setAttribute("error", "You currently have no carports in your basket.");
             return "index";
         }
-        return "basketpage";
+        return pageToShow;
     }
 }

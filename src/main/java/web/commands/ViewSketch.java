@@ -34,8 +34,8 @@ public class ViewSketch extends CommandProtectedPage {
                     Carport carport = r.getCarport();
                     SVGMaker svg_maker = new SVGMaker(carport);
                     svg_maker.initialSVGStuff();
-                    String skecth = svg_maker.giveMeSketch();
-                    request.setAttribute("skecth", skecth);
+                    String sketch = svg_maker.giveMeSketch();
+                    request.setAttribute("skecth", sketch);
                     return pageToShow;
                 }
             }

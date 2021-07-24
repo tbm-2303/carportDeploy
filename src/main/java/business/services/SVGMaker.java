@@ -1,7 +1,7 @@
 package business.services;
 
 import business.entities.Carport;
-import business.services.SVG;
+import business.entities.SVG;
 
 public class SVGMaker {
     private int width;

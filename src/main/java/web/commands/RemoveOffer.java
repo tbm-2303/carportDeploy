@@ -11,12 +11,13 @@ import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.InputMismatchException;
 
 
 public class RemoveOffer extends CommandProtectedPage {
-    private RequestFacade requestFacade;
-    private OrderFacade orderFacade;
-    private CarportFacade carportFacade;
+    private final RequestFacade requestFacade;
+    private final OrderFacade orderFacade;
+    private final CarportFacade carportFacade;
 
     public RemoveOffer(String pageToShow, String role) {
         super(pageToShow, role);
@@ -27,26 +28,19 @@ public class RemoveOffer extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException {
-
         try {
             if (request.getParameter("remove") != null) {
 
                 //remove request
-
-                Request_obj request_obj = requestFacade.getRequest(Integer.parseInt(request.getParameter("remove")));
-                int requestID = request_obj.getRequest_id();
-                requestFacade.removeRequestFromDB(requestID);
-
-                //remove carport
-                carportFacade.deleteCarport(request_obj.getCarport().getId());
-
+                int requestID = Integer.parseInt(request.getParameter("remove"));
+                requestFacade.updateRequestStatus(requestID, "declined");
+                return pageToShow;
             }
-            return pageToShow;
-
-        } catch (UserException ex) {
-            request.setAttribute("error", "ex.getMessage()");
-            return "viewmyoffer";
+        } catch (InputMismatchException e) {
+            request.setAttribute("error", e.getMessage());
+            return "index";
         }
+        return null;
     }
 }
 

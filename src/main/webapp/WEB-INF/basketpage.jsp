@@ -16,15 +16,22 @@
 
         <c:if test="${sessionScope.user.role == 'customer'}">
 
+
+            <c:if test="${sessionScope.Selected_Carport.id != null }">
+                <img class="img-fluid w-25"
+                     src="<c:url value='/IMAGE/ProductPage${sessionScope.Selected_Carport.id}.png'/>"
+                     alt="carport" type="submit"/><br>
+
+            </c:if>
             <table class="table table-success table-striped">
                 <thead>
                 <tr>
                     <th scope="col">CarportID</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Width</th>
-                    <th scope="col">Length</th>
-                    <th scope="col">ShedLength</th>
-                    <th scope="col">ShedWidth</th>
+                    <th scope="col">Price(kr)</th>
+                    <th scope="col">Width(mm)</th>
+                    <th scope="col">Length(mm)</th>
+                    <th scope="col">ShedLength(mm)</th>
+                    <th scope="col">ShedWidth(mm)</th>
                 </tr>
                 </thead>
                 <tr>
@@ -34,70 +41,28 @@
                     <td>${sessionScope.Selected_Carport.length}</td>
                     <td>${sessionScope.Selected_Carport.shed_length}</td>
                     <td>${sessionScope.Selected_Carport.shed_width}</td>
-
-        <c:if test="${sessionScope.Selected_Carport != null}">
-
-                    <td>
-                        <form action="${pageContext.request.contextPath}/fc/createorder_standard" method="post">
-                            <button type="submit" class=" btn btn-danger" name="accept"
-                                    value="${sessionScope.Selected_Carport.id}">Accept
-                            </button>
-                        </form>
-                    </td>
-
-                    <td>
-                        <form action="${pageContext.request.contextPath}/fc/removefrombasket" method="post">
-                            <button type="submit" class=" btn btn-danger" name="remove"
-                                    value="${sessionScope.Selected_Carport.id}">Remove
-                            </button>
-                        </form>
-                    </td>
-
+                    <c:if test="${sessionScope.Selected_Carport != null}">
+                        <td>
+                            <form action="${pageContext.request.contextPath}/fc/removefrombasket" method="post">
+                                <button type="submit" class=" btn btn-danger" name="remove"
+                                        value="${sessionScope.Selected_Carport.id}">Remove
+                                </button>
+                            </form>
+                        </td>
+                    </c:if>
                 </tr>
-
-                </c:if>
-
             </table>
+            <c:if test="${sessionScope.Selected_Carport != null}">
 
-        </c:if>
-
-
-        <c:if test="${not empty sessionScope.Selected_Carport_itemlist && sessionScope.Selected_Carport_itemlist != null }">
-            TEGNING:
-            <p><a href="${pageContext.request.contextPath}/fc/ViewSketch">Tegning</a><br>
-
-            <h4>Her kan du se en liste med materialer:</h4> <br>
-            <table class="table table-success table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Item Name</th>
-                <th scope="col">Item ID</th>
-                <th scope="col">Item Price</th>
-                <th scope="col">Item Width</th>
-                <th scope="col">Item Length</th>
-                <th scope="col">Item Info</th>
-                <th scope="col">Quantity</th>
-            </tr>
-            </thead>
-
-                    <c:forEach var="item" items="${sessionScope.Selected_Carport_itemlist}" varStatus="status">
-
-                        <tr>
-
-                            <td>${item.name}<br></td>
-                            <td>${item.item_id}</td>
-                            <td>${item.price}</td>
-                            <td>${item.width}</td>
-                            <td>${item.length}</td>
-                            <td>${item.info}</td>
-                            <td>${item.quantity}</td>
-                        </tr>
-
-                    </c:forEach>
-
-                </table>
+                <p>tryk her for at gå acceptere købet</p>
+                <form action="${pageContext.request.contextPath}/fc/createorder_standard" method="post">
+                    <button type="submit" class=" btn btn-danger" name="accept"
+                            value="${sessionScope.Selected_Carport.id}">Accept
+                    </button>
+                </form>
 
 
+            </c:if>
 
         </c:if>
 

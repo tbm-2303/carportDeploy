@@ -35,6 +35,9 @@ public class OrderFacade {
     public void updateOrderDimensions(int width,int length, int shed_length, int shed_width){
 
     }
+    public List<Order> getOrderByUser(String username)throws UserException{
+        return orderMapper.getOrderByUser(username);
+    }
 
 
 

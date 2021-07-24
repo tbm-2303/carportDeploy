@@ -34,7 +34,7 @@ public class SendRequest_standard extends CommandProtectedPage {
                 Carport carport = carportFacade.getCarport(carport_id);
                 session.setAttribute("Selected_Carport_itemlist", util.CustomCarportRecipe(carport.getLength(),carport.getWidth(),carport.getShed_width(),carport.getShed_length()));
                 session.setAttribute("Selected_Carport", carport);
-                return "index";
+                return pageToShow;
             }
             request.setAttribute("error", "You already have an carport in your basket. Please order/remove the carport from your basket " +
                     "before adding new ones to your basket.");

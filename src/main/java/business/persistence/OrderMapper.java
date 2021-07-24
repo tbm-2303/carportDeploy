@@ -79,4 +79,37 @@ public class OrderMapper {
         }
         return null;
     }
+
+
+    public List<Order> getOrderByUser(String username) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM orders WHERE user_name = ? ";
+
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, username);
+                ResultSet rs = ps.executeQuery();
+                List<Order> orderList = new ArrayList<>();
+                while (rs.next()) {
+                    double price = rs.getDouble("price");
+                    Timestamp timestamp = rs.getTimestamp("created");
+                    int request_id = rs.getInt("request_id");
+                    String user_name = rs.getString("user_name");
+                    int order_id = rs.getInt("order_id");
+                    String status = rs.getString("status_info");
+                    Order order = new Order(price,request_id,status,user_name);
+                    order.setTime(timestamp);
+                    order.setId(order_id);
+                    orderList.add(order);
+                }
+                return orderList;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

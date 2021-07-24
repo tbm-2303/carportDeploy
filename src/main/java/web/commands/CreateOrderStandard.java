@@ -44,7 +44,7 @@ public class CreateOrderStandard extends CommandProtectedPage {
             request.setAttribute("confirmation_object_standard", order);
             request.setAttribute("confirmation_request_standard", request_obj);
 
-            return "index";//order confirmation_standard page
+            return "confirmationpage";//order confirmation_standard page
         } catch (UserException exception) {
             exception.printStackTrace();
             return "index";

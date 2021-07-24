@@ -40,60 +40,17 @@
                             <td>${var.carport.shed_width}</td>
                             <td>${var.status}</td>
                             <td>${var.carport.price}</td>
-                            <td>
-                                <form action="${pageContext.request.contextPath}/fc/createorder" method="post">
-                                    <button type="submit" class=" btn btn-danger" name="accept"
-                                            value="${var.request_id}">Accept offer -> (${var.request_id})
-                                    </button>
-                                </form>
-                                <form action="${pageContext.request.contextPath}/fc/removeoffer" method="post">
-                                    <button type="submit" class=" btn btn-danger" name="remove"
-                                            value="${var.request_id}">Remove offer -> (${var.request_id})
-                                    </button>
-                                </form>
-                            </td>
+                            <td><form action="${pageContext.request.contextPath}/fc/ManageOffer" method="post">
+                                <button type="submit" class=" btn btn-danger" name="accept"
+                                        value="${var.request_id}">Se mere information om tilbud.
+                                </button>
+                            </form></td>
                         </tr>
 
                     </c:if>
                 </c:forEach>
             </table>
 
-        </c:if>
-
-
-        <c:if test="${not empty requestScope.requestList_customer}">
-
-            TEGNING:
-            <p><a href="${pageContext.request.contextPath}/fc/ViewSketch">Tegning</a><br>
-            <h4>Her kan du se en liste med materialer:</h4> <br>
-            <table class="table table-success table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Item ID</th>
-                    <th scope="col">Item Price</th>
-                    <th scope="col">Item Width</th>
-                    <th scope="col">Item Length</th>
-                    <th scope="col">Item Info</th>
-                    <th scope="col">Quantity</th>
-                </tr>
-                </thead>
-
-                <c:forEach var="item" items="${requestScope.itemlist_customer}" varStatus="status">
-
-                    <tr>
-                        <td>${item.name}<br></td>
-                        <td>${item.item_id}</td>
-                        <td>${item.price}</td>
-                        <td>${item.width}</td>
-                        <td>${item.length}</td>
-                        <td>${item.info}</td>
-                        <td>${item.quantity}</td>
-                    </tr>
-
-                </c:forEach>
-
-            </table>
         </c:if>
 
 

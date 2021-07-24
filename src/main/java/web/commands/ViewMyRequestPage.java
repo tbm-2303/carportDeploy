@@ -38,15 +38,15 @@ public class ViewMyRequestPage extends CommandProtectedPage {
             List<Item> itemlist = new ArrayList<>();
 
 
-            if (!requestList.isEmpty()) {
-                for (Request_obj item : requestList) {
-                    Carport carport = item.getCarport();
+            if (!requestList.isEmpty()) {// hvis den er forskellig fra null så løber vi listen igennem og sætter boolean.
+                for (Request_obj requestObj : requestList) {
+                    Carport carport = requestObj.getCarport();
                     if (carport.getShed_width() > 0 && carport.getShed_length() > 0) {
                         carport.setHasShed(true);
                     }
                     itemlist = util.CustomCarportRecipe(carport.getLength(), carport.getWidth(), carport.getShed_width(), carport.getShed_length());
-                    item.setItemList(itemlist);
-                    requestList2.add(item);
+                    requestObj.setItemList(itemlist);
+                    requestList2.add(requestObj); // sætter request_obj itemlist og boolean. derefter ligges den ind i listen.
                 }
             }
 
