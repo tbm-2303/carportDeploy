@@ -23,24 +23,19 @@ public class ViewSketch extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException {
+        try {
+            int request_id = Integer.parseInt(request.getParameter("sketch"));
+            Request_obj request_obj = requestFacade.getRequest(request_id);
+            Carport carport = request_obj.getCarport();
+            SVGMaker svgMaker = new SVGMaker(carport);
+            svgMaker.initialSVGStuff();
+            String sketch = svgMaker.giveMeSketch();
+            request.setAttribute("sketch", sketch);
+            return pageToShow;
 
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        List<Request_obj> requestList = requestFacade.getAllRequest3(user.getId(), "requested");
-
-        if (requestList != null) {
-            for (Request_obj r : requestList) {
-                if (r.getUser().getId() == user.getId()) {
-                    Carport carport = r.getCarport();
-                    SVGMaker svg_maker = new SVGMaker(carport);
-                    svg_maker.initialSVGStuff();
-                    String sketch = svg_maker.giveMeSketch();
-                    request.setAttribute("skecth", sketch);
-                    return pageToShow;
-                }
-            }
+        } catch (UserException e) {
+            request.setAttribute("error", e.getMessage());
+            return "index";
         }
-        request.setAttribute("error", "You need to make a request before u can see an sketch");
-        return "index";
     }
 }

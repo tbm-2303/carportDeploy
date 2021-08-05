@@ -34,8 +34,8 @@
                         <td>${user.id}</td>
                         <td>${user.email}</td>
                         <td>${user.name}</td>
-                        <td>${user.number}</td>
-                        <td>${user.adress}</td>
+                        <td>${user.telephone}</td>
+                        <td>${user.address}</td>
                         <td>${user.role}</td>
                         <td>
                             <form action="${pageContext.request.contextPath}/fc/user_orderhistory" method="post">

@@ -4,8 +4,10 @@ package web.commands;
 
 import business.entities.*;
 import business.exceptions.UserException;
+import business.services.ItemFacade;
 import business.services.OrderFacade;
 import business.services.RequestFacade;
+import business.services.Util;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServlet;
@@ -20,11 +22,15 @@ import java.util.List;
 public class CreateOrderCommand extends CommandProtectedPage {
     private RequestFacade requestFacade;
     private OrderFacade orderFacade;
+    Util util;
+    ItemFacade itemFacade;
 
     public CreateOrderCommand(String pageToShow, String role) {
         super(pageToShow, role);
         this.requestFacade = new RequestFacade(database);
         this.orderFacade = new OrderFacade(database);
+        this.util = new Util(database);
+        itemFacade = new ItemFacade(database);
     }
 
     @Override
@@ -33,17 +39,24 @@ public class CreateOrderCommand extends CommandProtectedPage {
 
         try {
 
-
             if (request.getParameter("accept") != null) {
                 Request_obj request_obj = requestFacade.getRequest(Integer.parseInt(request.getParameter("accept")));
                 Date date = new Date();
                 long time = date.getTime();
                 Timestamp ts = new Timestamp(time);
-                requestFacade.updateRequestStatus(request_obj.getRequest_id(), "ordered");
+                requestFacade.updateRequestStatus(request_obj.getRequest_id(), "ordered");//updates the request status in db.
                 request_obj.setStatus("ordered");
-                Order order = orderFacade.createOrder(request_obj, ts);
+                List<Item> itemlist = util.CustomCarportRecipe(request_obj.getCarport().getLength(),
+                        request_obj.getCarport().getWidth(),request_obj.getCarport().getShed_width(),request_obj.getCarport().getShed_width());
+                int carportID = request_obj.getCarport().getId();
+                Order order = orderFacade.createOrder(request_obj, ts, itemlist, carportID);// creating an order in db.
                 request.setAttribute("confirmation_object", order);
                 request.setAttribute("confirmation_request", request_obj);
+
+
+                //lav en itemlist vha. util metoden.
+                //brug mapper metoder til at udfylde link tabellen. (carport id, item id, item quantity)
+
             }
             return pageToShow ;//order confirmation page
         } catch (UserException ex) {

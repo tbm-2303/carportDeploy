@@ -23,8 +23,11 @@
             Skur mål: ${requestScope.request_object.carport.shed_width}mm x ${requestScope.request_object.carport.shed_length}mm<br>
             Pris: ${requestScope.request_object.carport.price}kr<br>
 
-
-            <p>TEGNING: <a href="${pageContext.request.contextPath}/fc/ViewSketch">Tegning</a><br>
+            <form action="${pageContext.request.contextPath}/fc/ViewSketch" method="post">
+                <button type="submit" class=" btn btn-danger" name="sketch"
+                        value="${requestScope.request_object.request_id}">Vis tegning
+                </button>
+            </form>
 
             <p>Her kan du se en liste med materialer:</p>
             <table class="table table-success table-striped">
@@ -52,25 +55,27 @@
                     </tr>
                 </c:forEach>
             </table>
-            <td>
-                <p> Du kan acceptere dine request gennem den email, du blev tilsendt da du sendte din request til os.
-                    Følg ansvisningerne i emailen eller tryk her for at acceptere dette request.
-                </p>
-                <form action="${pageContext.request.contextPath}/fc/createorder" method="post">
-                    <button type="submit" class=" btn btn-danger" name="accept"
-                            value="${requestScope.request_object.request_id}">Accepter tilbud
-                    </button>
-                </form>
-                <p> Du kan afvise dine request gennem den email, du blev tilsendt da du sendte din request til os.
-                    Følg ansvisningerne i emailen eller tryk her for at afivse denne request.
-                </p>
-                <form action="${pageContext.request.contextPath}/fc/removeoffer" method="post">
-                    <button type="submit" class=" btn btn-danger" name="remove"
-                            value="${requestScope.request_object.request_id}">Fjern tilbud
-                    </button>
-                </form>
-            </td>
-
+            <c:if test="${requestScope.test != null}">
+                <td>
+                    <p> Du kan acceptere dine request gennem den email, du blev tilsendt da du sendte din request til
+                        os.
+                        Følg ansvisningerne i emailen eller tryk her for at acceptere dette request.
+                    </p>
+                    <form action="${pageContext.request.contextPath}/fc/createorder" method="post">
+                        <button type="submit" class=" btn btn-danger" name="accept"
+                                value="${requestScope.request_object.request_id}">Accepter tilbud
+                        </button>
+                    </form>
+                    <p> Du kan afvise dine request gennem den email, du blev tilsendt da du sendte din request til os.
+                        Følg ansvisningerne i emailen eller tryk her for at afivse denne request.
+                    </p>
+                    <form action="${pageContext.request.contextPath}/fc/removeoffer" method="post">
+                        <button type="submit" class=" btn btn-danger" name="remove"
+                                value="${requestScope.request_object.request_id}">Fjern tilbud
+                        </button>
+                    </form>
+                </td>
+            </c:if>
 
         </c:if>
 

@@ -51,7 +51,7 @@ public class CarportFacade {
         carportMapper.updateCarportPrice(carport_id, price);
     }
 
-    public List<Carport> getAllStandardCarports(int status) {
+    public List<Carport> getAllStandardCarports(String status) {
 
         return carportMapper.getAllStandardCarports(status);
     }

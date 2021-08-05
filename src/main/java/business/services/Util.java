@@ -63,9 +63,9 @@ public class Util {
             listy.add(itemFacade.SelectItemFromDB("Spær", 4800));// always there
 
             int count = (int) Math.floor((double) width / 300);
-            Item spær = (itemFacade.SelectItemFromDB("Spær", length));
-            spær.setQuantity(count);
-            listy.add(spær);
+            Item spear = (itemFacade.SelectItemFromDB("Spær", length));
+            spear.setQuantity(count);
+            listy.add(spear);
 
             //stolper
             Item stolpe = (itemFacade.SelectItemFromDB("Stolpe", 3000));
@@ -76,7 +76,7 @@ public class Util {
                 int s1 = stolpe.getQuantity() + (stolpe_count * 3);
                 stolpe.setQuantity(s1);
             }
-            if (shed_length > 0 || shed_width > 0) {
+            if (shed_length > 0 && shed_width > 0) {
                 int s2 = stolpe.getQuantity();
                 stolpe.setQuantity(s2 + 3);
 

@@ -37,7 +37,7 @@ public class CreateOrderStandard extends CommandProtectedPage {
             Date date = new Date();
             long time = date.getTime();
             Timestamp ts = new Timestamp(time);
-            Order order = orderFacade.createOrder(request_obj, ts);//create order in db.
+            Order order = orderFacade.createOrderStandard(request_obj, ts);//create order in db.
             session.setAttribute("Selected_Carport", null);
             session.setAttribute("Selected_Carport_itemlist", null);
 

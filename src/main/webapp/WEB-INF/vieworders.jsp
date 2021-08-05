@@ -26,6 +26,7 @@
                     <th scope="col">Time</th>
                     <th scope="col">Request ID</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Type</th>
                 </tr>
                 </thead>
                 <c:forEach var="order" items="${sessionScope.orderList_admin}" varStatus="status">
@@ -36,6 +37,7 @@
                         <td>${order.time}</td>
                         <td>${order.request_id}</td>
                         <td>${order.status}</td>
+                        <td>${order.carport.type}</td>
 
                         <td>
                             <form action="${pageContext.request.contextPath}/fc/viewOrderSpecs" method="post">

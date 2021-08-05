@@ -17,7 +17,7 @@ public class SVGMaker {
         this.length = carport.getLength()/10;
         this.shed_length = carport.getShed_length()/10;
         this.shed_width = carport.getShed_width()/10;
-        svg = new SVG(0, 0, "0 0 " + width + " " + length, 25, 25);
+        svg = new SVG(0, 0, "0 0 " + width + " " + length, 50, 50);
         beam_distance = 30;
     }
 

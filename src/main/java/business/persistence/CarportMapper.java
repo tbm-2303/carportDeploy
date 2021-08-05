@@ -61,15 +61,13 @@ public class CarportMapper {
                 ps.setInt(5, carport.getWidth());
                 ps.setInt(6, carport.getShed_length());
                 ps.setInt(7, carport.getShed_width());
-                ps.setInt(8, 1);
+                ps.setString(8, "custom");
                 ps.executeUpdate();
 
                 ResultSet ids = ps.getGeneratedKeys();
                 ids.next();
                 int id = ids.getInt(1);
                 carport.setId(id);
-                //link table
-                // Linktable(carport);
                 return carport;
 
             } catch (SQLException ex) {
@@ -80,12 +78,6 @@ public class CarportMapper {
         }
     }
 
-    public void Linktable(Carport carport) throws UserException {
-
-        for (Item item : carport.getItemList()) {
-            itemFacade.Linktable(carport.getId(), item.getItem_id());
-        }
-    }
 
 
     public Carport getCarport(int carport_id) throws UserException {
@@ -103,8 +95,10 @@ public class CarportMapper {
                     int width = rs.getInt("width");
                     int shed_width = rs.getInt("shed_width");
                     int shed_length = rs.getInt("shed_length");
+                    String type = rs.getString("custom");
                     Carport carport = new Carport(price, length, width, shed_length, shed_width, "flat", info);
                     carport.setId(carport_id);
+                    carport.setType(type);
                     return carport;
                 }
                 else{
@@ -163,13 +157,13 @@ public class CarportMapper {
         }
     }
 
-    public List<Carport> getAllStandardCarports(int status) {
+    public List<Carport> getAllStandardCarports(String status) {
 
         try (Connection connection = database.connect()) {
             String sql = "SELECT * FROM carport WHERE custom=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, status);
+                ps.setString(1, status);
                 ResultSet rs = ps.executeQuery();
                 List<Carport> carportList = new ArrayList<>();
                 while (rs.next()) {

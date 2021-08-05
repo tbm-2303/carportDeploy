@@ -11,7 +11,7 @@
 
     <jsp:body>
         <h7> TEGNING: Her kan du se en sketch for din forespurgte carport </h7><br>
-        ${requestScope.skecth}
+        ${requestScope.sketch}
 
 
         <c:if test="${requestScope.error != null }">

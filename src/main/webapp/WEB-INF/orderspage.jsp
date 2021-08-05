@@ -22,6 +22,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">Status</th>
                 <th scope="col">Time</th>
+                <th scope="col">Type</th>
 
             </tr>
             </thead>
@@ -33,10 +34,11 @@
                     <td>${var.price}</td>
                     <td>${var.status}</td>
                     <td>${var.time}</td>
+                    <td>${var.carport.type}</td>
                     <td>
                         <form action="${pageContext.request.contextPath}/fc/orderInfoCommand" method="post">
-                            <button type="submit" class=" btn btn-danger" name="accept"
-                                    value="${var.request_id}">Se mere
+                            <button type="submit" class=" btn btn-danger" name="info"
+                                    value="${var.id}">Se mere
                             </button>
                         </form>
                     </td>

@@ -24,6 +24,9 @@ public class Order {
 
     }
 
+    public Carport getCarport() {
+        return carport;
+    }
 
     public void setCarport(Carport carport) {
         this.carport = carport;

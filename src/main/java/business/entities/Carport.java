@@ -5,8 +5,7 @@ import java.util.List;
 public class Carport {
 
 
-    public Carport(double price, int length, int width, int shed_length, int shed_width, String roof_type, String info)
-    {
+    public Carport(double price, int length, int width, int shed_length, int shed_width, String roof_type, String info) {
         this.price = price;
         this.length = length;
         this.width = width;
@@ -15,13 +14,13 @@ public class Carport {
         this.roof_type = roof_type;
         this.info = info;
         selling_price = 0;
-        hasShed=false;
+        hasShed = false;
     }
 
     private int id;
     private double selling_price;
     private List<Item> itemList;
-
+    private String type;
     private double price;
     private int length;
     private int width;
@@ -33,6 +32,13 @@ public class Carport {
 
     private String svg;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getSvg() {
         return svg;

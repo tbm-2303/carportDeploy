@@ -137,7 +137,7 @@
         <div class="test1">
             <form action="${pageContext.request.contextPath}/fc/orderhistory" method="post">
                 <button type="submit" class="point1" name="orders" id="orders"
-                        value="${sessionScope.user.id}">Se gennemførte ordre
+                        value="${sessionScope.user.id}">Ordre historik
                 </button>
             </form>
         </div>

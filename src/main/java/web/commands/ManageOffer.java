@@ -42,15 +42,9 @@ public class ManageOffer extends CommandProtectedPage {
             itemlist = util.CustomCarportRecipe(carport.getLength(), carport.getWidth(), carport.getShed_width(), carport.getShed_length());
             request.setAttribute("request_object", request1);
             request.setAttribute("itemlist", itemlist);
-
-
-
+            request.setAttribute("test", "test");
 
             return pageToShow;
-
-
-
-
 
         } catch (UserException e) {
             request.getSession().setAttribute("error", "database error: no requests found");

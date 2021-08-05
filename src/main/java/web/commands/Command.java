@@ -48,7 +48,7 @@ public abstract class Command {
 
         commands.put("ManageOffer", new ManageOffer("manageoffer", "customer"));
         commands.put("orderhistory", new ordersCommand("orderspage","customer"));
-        commands.put("orderInfoCommand", new orderInfoCommand("orderinfopage","customer"));
+        commands.put("orderInfoCommand", new orderInfoCommand("manageoffer","customer"));
 
 
         //commands.put("showrequstpage", new ShowRequestpage("viewrequests", "employee"));

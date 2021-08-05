@@ -1,5 +1,6 @@
 package web.commands;
 
+import business.entities.Carport;
 import business.entities.Order;
 
 import business.entities.Request_obj;
@@ -35,20 +36,20 @@ public class ordersCommand extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             HttpSession session = request.getSession();
-            List<Order> reallist = new ArrayList<>();
+            List<Order> orderList = new ArrayList<>();
             User user = (User) session.getAttribute("user");
             int user_id = user.getId();
-            List<Order> orderlist = orderFacade.getOrderByUser(user.getName());
+            List<Order> re = orderFacade.getOrdersByUser(user.getName());
 
-            for (Order order : orderlist) {
+            for (Order order : re) {
                 Request_obj request_obj = requestFacade.getRequest(order.getRequest_id());
-                int id = request_obj.getCarport().getId();
+                //int id = request_obj.getCarport().getId();
                 if (request_obj.getUser().getId() == user_id) {
-                    reallist.add(order);
+                    order.setCarport(request_obj.getCarport());
+                    orderList.add(order);
                 }
             }
-            request.setAttribute("orderlist", reallist);
-            request.setAttribute("carportfacade", carportFacade);
+            request.setAttribute("orderlist", orderList);
             return pageToShow;
 
 

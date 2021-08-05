@@ -20,7 +20,8 @@
         <h6>Ordre nummer: #${requestScope.confirmation_object.id} blev gennemført: ${requestScope.confirmation_object.time}</h6>
         <h6>Carport: CPN${requestScope.confirmation_request.carport.id}  Mål:${requestScope.confirmation_request.carport.length}mm X${requestScope.confirmation_request.carport.width}mm</h6>
         <h6>${requestScope.confirmation_object.price}kr</h6>
-        <h6>Tak for din bestilling ${requestScope.confirmation_request.user.name}. En bekræftelses mail er sendt til ${requestScope.confirmation_request.user.email} </h6>
+        <h6>Tak for din bestilling ${requestScope.confirmation_request.user.name}. En bekræftelses mail med disse
+            informationer er sendt til ${requestScope.confirmation_request.user.email} </h6>
         </c:if>
 
 
